@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cep-wp-dev
+
+# If you have a certificate in the Ingress Service,
+# you can use the annotation to force-ssl-redirect
+# Enable Basic HTTP auth with the auth-* annotations
+# annotations:
+#    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+#    nginx.ingress.kubernetes.io/auth-type: basic
+#    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+#    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+spec:
+  rules:
+  - host: jira.mydomain.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jira
+          servicePort: 8080
+  - host: confluence.mydomain.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: confluence
+          servicePort: 80
